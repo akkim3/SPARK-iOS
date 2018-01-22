@@ -1,5 +1,5 @@
 //
-//  loginViewController.swift
+//  signUpViewController.swift
 //  Inquisitor
 //
 //  Created by Akhil on 1/3/18.
@@ -9,15 +9,13 @@
 import UIKit
 import AVFoundation
 import FirebaseAuth
+class signUpViewController: UIViewController {
 
-class loginViewController: UIViewController,UITextFieldDelegate {
-
-    @IBOutlet weak var passwordTextField: UITextField!
-    @IBOutlet weak var loginTextField: UITextField!
     @IBOutlet weak var gradientView: UIView!
-    @IBOutlet weak var titleLabel: UILabel!
     
+    @IBOutlet weak var loginTextField: UITextField!
     
+    @IBOutlet weak var passwordTextField: UITextField!
     
     
     override func viewDidLayoutSubviews() {
@@ -30,21 +28,23 @@ class loginViewController: UIViewController,UITextFieldDelegate {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Gradient Set Up
+        
+        // Do any additional setup after loading the view.
         let startingColor = UIColor(red:0.34, green:0.80, blue:0.95, alpha:1.0)
         let endingColor = UIColor(red:0.18, green:0.50, blue:0.93, alpha:1.0)
         let gradient = CAGradientLayer()
         gradient.frame = view.bounds
         gradient.colors = [startingColor.cgColor, endingColor.cgColor]
-        gradientView.layer.insertSublayer(gradient, at: 0)
-    //Setting up TTS
-        let speechSynthesizer = AVSpeechSynthesizer()
-        let speechUtterance = AVSpeechUtterance(string: "Welcome to Inquisitor, enter your email and password to login.")
         
+        
+        gradientView.layer.insertSublayer(gradient, at: 0)
+        //Setting up TTS
+        let speechSynthesizer = AVSpeechSynthesizer()
+        let speechUtterance = AVSpeechUtterance(string: "Sign up easily for an account by entering in your email and password.")
+                        
         speechSynthesizer.speak(speechUtterance)
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -57,6 +57,8 @@ class loginViewController: UIViewController,UITextFieldDelegate {
         textField.resignFirstResponder()
         return true
     }
+    
+
     /*
     // MARK: - Navigation
 

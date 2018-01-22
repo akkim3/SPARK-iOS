@@ -1,5 +1,5 @@
 //
-//  signUpViewController.swift
+//  loginViewController.swift
 //  Inquisitor
 //
 //  Created by Akhil on 1/3/18.
@@ -9,13 +9,15 @@
 import UIKit
 import AVFoundation
 import FirebaseAuth
-class signUpViewController: UIViewController {
 
-    @IBOutlet weak var gradientView: UIView!
-    
-    @IBOutlet weak var loginTextField: UITextField!
-    
+class loginViewController: UIViewController,UITextFieldDelegate {
+
     @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var loginTextField: UITextField!
+    @IBOutlet weak var gradientView: UIView!
+    @IBOutlet weak var titleLabel: UILabel!
+    
+    
     
     
     override func viewDidLayoutSubviews() {
@@ -28,23 +30,29 @@ class signUpViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Do any additional setup after loading the view.
+
+        // Gradient Set Up
         let startingColor = UIColor(red:0.34, green:0.80, blue:0.95, alpha:1.0)
         let endingColor = UIColor(red:0.18, green:0.50, blue:0.93, alpha:1.0)
         let gradient = CAGradientLayer()
         gradient.frame = view.bounds
         gradient.colors = [startingColor.cgColor, endingColor.cgColor]
-        
-        
         gradientView.layer.insertSublayer(gradient, at: 0)
-        //Setting up TTS
-        let speechSynthesizer = AVSpeechSynthesizer()
-        let speechUtterance = AVSpeechUtterance(string: "Sign up easily for an account by entering in your email and password.")
+        let rectShape = CAShapeLayer()
+        rectShape.bounds = self.gradientView.frame
+        rectShape.position = self.gradientView.center
+        rectShape.path = UIBezierPath(roundedRect: self.gradientView.bounds, byRoundingCorners: [.topRight,.topLeft], cornerRadii: CGSize(width: 20, height: 20)).cgPath
         
-        speechSynthesizer.speak(speechUtterance)
+        //self.myView.layer.backgroundColor = UIColor.green.cgColor
+        //Here I'm masking the textView's layer with rectShape layer
+        self.gradientView.layer.mask = rectShape
+    //Setting up TTS
+        let speechSynthesizer = AVSpeechSynthesizer()
+        let speechUtterance = AVSpeechUtterance(string: "Welcome to Inquisitor, enter your email and password to login.")
+        
+        //speechSynthesizer.speak(speechUtterance)
     }
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -57,8 +65,6 @@ class signUpViewController: UIViewController {
         textField.resignFirstResponder()
         return true
     }
-    
-
     /*
     // MARK: - Navigation
 
